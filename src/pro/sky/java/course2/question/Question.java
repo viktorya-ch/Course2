@@ -9,15 +9,17 @@ public class Question {
         this.question = question;
         this.answer = answer;
     }
-    public String getQuestion(){
+
+    public String getQuestion() {
         return this.question;
     }
 
-    public String getAnswer(){
+    public String getAnswer() {
         return this.answer;
     }
 
     public void setQuestion(String question) {
+
         this.question = question;
     }
 
@@ -25,5 +27,11 @@ public class Question {
         this.answer = answer;
     }
 
-
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
 }
