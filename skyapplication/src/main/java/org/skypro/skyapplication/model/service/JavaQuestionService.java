@@ -55,7 +55,8 @@ public class JavaQuestionService implements QuestionService {
     }
 
 
-    public Question getRandomQuestion() {
+    public Question getRandomQuestion(String lesson) {
+        List<Question> questions = getQuestionsByLesson(lesson);
         if (questions.isEmpty()) {
             return null;
         }
