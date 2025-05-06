@@ -1,11 +1,13 @@
 package org.skypro.skyapplication.model.service;
 
 import org.skypro.skyapplication.model.question.Question;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Service
 public class JavaQuestionService implements QuestionService {
 
     private final List<Question> questions;
@@ -34,12 +36,12 @@ public class JavaQuestionService implements QuestionService {
 
 
     @Override
-    public void addQuestion(String lesson, Question question) {
-        if (" Java ".equalsIgnoreCase(lesson)) {
+    public void addQuestion(Question question) {
+       // if (" Java ".equalsIgnoreCase()) {
             questions.add(question);
         }
 
-    }
+
 
     @Override
     public List<Question> getQuestionsByLesson(String lesson) {

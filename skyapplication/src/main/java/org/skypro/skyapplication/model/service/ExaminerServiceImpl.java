@@ -23,14 +23,14 @@ public class ExaminerServiceImpl implements ExaminerService {
     }
 
     @Override
-    public List<Question> getQuestion(String lesson) {
-        List<Question> availableQuestions = questionService.getQuestionsByLesson(lesson);
-        if (availableQuestions.size() < MAX_QUESTIONS) {
+    public List<Question> getQuestion(int amount) {
+        List<Question> availableQuestions = questionService.getQuestionsByLesson(" Java ");
+        if (availableQuestions.size() > MAX_QUESTIONS) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, " Запрошено слишком много вопросов ");
         }
         Set<Question> uniqueQuestions = new HashSet<>();
-        while (uniqueQuestions.size() < MAX_QUESTIONS) {
-            Question randomQuestion = ((JavaQuestionService) questionService).getRandomQuestion(lesson);
+        while (uniqueQuestions.size() < amount) {
+            Question randomQuestion = ((JavaQuestionService) questionService).getRandomQuestion(" Java ");
             if (randomQuestion != null) {
                 uniqueQuestions.add(randomQuestion);
             }

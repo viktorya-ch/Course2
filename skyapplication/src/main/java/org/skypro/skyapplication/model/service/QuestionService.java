@@ -6,12 +6,14 @@ import java.util.List;
 
 public interface QuestionService {
 
-    void addQuestion(String lesson, Question question);
+    void addQuestion(Question question);
 
     List<Question> getQuestionsByLesson(String lesson);
 
     void deleteQuestion(String lesson, String question);
 
     void updateQuestion(String lesson, String oldQuestion, Question newQuestion);
+
+    Question getRandomQuestion (String lesson);
 
 }

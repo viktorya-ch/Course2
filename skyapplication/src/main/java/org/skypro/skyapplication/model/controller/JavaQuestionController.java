@@ -5,10 +5,7 @@ package org.skypro.skyapplication.model.controller;
 import org.skypro.skyapplication.model.question.Question;
 import org.skypro.skyapplication.model.service.JavaQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,14 +19,14 @@ public class JavaQuestionController {
         this.javaQuestionService= javaQuestionService;
     }
 
-    @GetMapping
+    @PostMapping
     public String addQuestion(@RequestParam String question, @RequestParam String answer){
         Question newQuestion = new Question(question,answer);
-        javaQuestionService.addQuestion(" Java ", newQuestion);
+        javaQuestionService.addQuestion(newQuestion);
         return " Новый вопрос добавлен: " + newQuestion;
     }
 
-    @GetMapping
+    @DeleteMapping
     public String removeQuestion (@RequestParam String question){
         javaQuestionService.deleteQuestion(" Java ", question);
         return " Удаленный вопрос: " + question;
