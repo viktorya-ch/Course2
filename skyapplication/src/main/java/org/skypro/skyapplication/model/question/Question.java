@@ -1,4 +1,4 @@
-package pro.sky.java.course2.question;
+package org.skypro.skyapplication.model.question;
 
 public class Question {
     private String question;
@@ -35,3 +35,4 @@ public class Question {
                 '}';
     }
 }
+
