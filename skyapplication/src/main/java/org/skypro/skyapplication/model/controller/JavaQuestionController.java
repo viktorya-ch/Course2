@@ -25,19 +25,19 @@ public class JavaQuestionController {
     @GetMapping
     public String addQuestion(@RequestParam String question, @RequestParam String answer){
         Question newQuestion = new Question(question,answer);
-        javaQuestionService.addQuestion(" Java Core ", newQuestion);
+        javaQuestionService.addQuestion(" Java ", newQuestion);
         return " Новый вопрос добавлен: " + newQuestion;
     }
 
     @GetMapping
     public String removeQuestion (@RequestParam String question){
-        javaQuestionService.deleteQuestion(" Java Core ", question);
+        javaQuestionService.deleteQuestion(" Java ", question);
         return " Удаленный вопрос: " + question;
     }
 
 
     @GetMapping
     public List<Question>getAllQuestions(){
-        return javaQuestionService.getQuestionsByLesson(" Java Core ");
+        return javaQuestionService.getQuestionsByLesson(" Java ");
     }
 }
