@@ -20,7 +20,7 @@ public class JavaQuestionServiceTest {
     @Test
     void testAddQuestion() {
         Question question = new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной ");
-        javaQuestionService.addQuestion(" Java ", question);
+        javaQuestionService.addQuestion(question);
         List<Question> questions = javaQuestionService.getQuestionsByLesson(" Java ");
         assertEquals(1, questions.size());
         assertEquals(" Что такое инициализация переменной? ", questions.get(0).getQuestion());
@@ -29,7 +29,7 @@ public class JavaQuestionServiceTest {
     @Test
     void testDeleteQuestion() {
         Question question = new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной ");
-        javaQuestionService.addQuestion(" Java ", question);
+        javaQuestionService.addQuestion(question);
         assertEquals(1, javaQuestionService.getQuestionsByLesson(" Java ").size());
         javaQuestionService.deleteQuestion(" Java ", " Что такое инициализация переменной? ");
         assertEquals(0, javaQuestionService.getQuestionsByLesson(" Java ").size());
@@ -38,7 +38,7 @@ public class JavaQuestionServiceTest {
     @Test
     void testUpdateQuestion() {
         Question question = new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной ");
-        javaQuestionService.addQuestion(" Java ", question);
+        javaQuestionService.addQuestion(question);
         Question newQuestion = new Question(" Что такое инициализация переменной? ", " Updated answer ");
         javaQuestionService.updateQuestion(" Java ", " Что такое инициализация переменной? ", newQuestion);
         List<Question> questions = javaQuestionService.getQuestionsByLesson(" Java ");
@@ -47,8 +47,8 @@ public class JavaQuestionServiceTest {
 
     @Test
     void testGetRandomQuestion() {
-        javaQuestionService.addQuestion(" Java ", new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной "));
-        javaQuestionService.addQuestion(" Java ", new Question(" Что такое переменная? ", " Область в памяти компьютера для хранения данных, которой можно присвоить имя "));
+        javaQuestionService.addQuestion( new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной "));
+        javaQuestionService.addQuestion(new Question(" Что такое переменная? ", " Область в памяти компьютера для хранения данных, которой можно присвоить имя "));
         Question randomQuestion = javaQuestionService.getRandomQuestion(" Java ");
         assertNotNull(randomQuestion);
         assertTrue(randomQuestion.getQuestion().equals("Что такое инициализация переменной?") || randomQuestion.getQuestion().equals(" Что такое переменная? "));

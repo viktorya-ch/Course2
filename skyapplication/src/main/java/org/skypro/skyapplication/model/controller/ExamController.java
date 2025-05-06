@@ -17,17 +17,15 @@ public class ExamController {
     private final ExaminerService examinerService;
 
     @Autowired
-    public ExamController(ExaminerService examinerService){
-        this.examinerService=examinerService;
+    public ExamController(ExaminerService examinerService) {
+        this.examinerService = examinerService;
     }
 
     @GetMapping("/questions")
-    public ResponseEntity<List<Question>>getQuestions(@RequestParam("сумма") int amount,
-                                                      @RequestParam ("урок") String lesson){
-        List<Question>questions=examinerService.getQuestion(lesson);
-        if (questions.size()<amount){
-            return ResponseEntity.badRequest().body(null);
+    public ResponseEntity<List<Question>> getQuestions(@RequestParam int amount) {
+        {
+            List<Question> questions = examinerService.getQuestion(amount);
+            return ResponseEntity.ok(questions);
         }
-        return ResponseEntity.ok(questions.subList(0,amount));
     }
 }
