@@ -7,12 +7,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.skypro.skyapplication.model.question.Question;
 import org.skypro.skyapplication.model.service.ExaminerServiceImpl;
+import org.skypro.skyapplication.model.service.JavaQuestionService;
 import org.skypro.skyapplication.model.service.QuestionService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class ExaminerServiceImplTest {
@@ -20,7 +21,7 @@ public class ExaminerServiceImplTest {
     private ExaminerServiceImpl examinerService;
 
     @Mock
-    private QuestionService questionService;
+    private JavaQuestionService questionService;
 
     @BeforeEach
     void setUp(){
@@ -35,6 +36,13 @@ public class ExaminerServiceImplTest {
         List<Question>result = examinerService.getQuestion(15);
         assertEquals(1,result.size());
         assertEquals(" Что такое инициализация переменной? ", result.get(0).getQuestion());
+    }
+    void testGetRandomQuestion(){
+        when(questionService.getQuestionsByLesson(" Java ")).thenReturn(List.of(new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной "),
+                new Question(" Что такое переменная? ","Область в памяти компьютера для хранения данных, которой можно присвоить имя ")));
+        Question randomQuestion = examinerService.getRandomQuestion(" Java ");
+        assertNotNull(randomQuestion);
+        assertTrue(randomQuestion.getQuestion().equals(" Что такое инициализация переменной? ") || randomQuestion.getQuestion().equals(" Что такое переменная? "));
     }
 
 

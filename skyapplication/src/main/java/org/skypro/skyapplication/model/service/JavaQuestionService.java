@@ -37,8 +37,7 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public void addQuestion(Question question) {
-       // if (" Java ".equalsIgnoreCase()) {
-            questions.add(question);
+      questions.add(question);
         }
 
 

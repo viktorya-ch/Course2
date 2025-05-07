@@ -19,11 +19,16 @@ public class JavaQuestionServiceTest {
 
     @Test
     void testAddQuestion() {
-        Question question = new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной ");
-        javaQuestionService.addQuestion(question);
-        List<Question> questions = javaQuestionService.getQuestionsByLesson(" Java ");
-        assertEquals(1, questions.size());
-        assertEquals(" Что такое инициализация переменной? ", questions.get(0).getQuestion());
+        List<Question>questionsBefore = javaQuestionService.getQuestionsByLesson(" Java ");
+        int sizeBefore = questionsBefore.size();
+        Question question=new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной ");
+        javaQuestionService.addQuestion(new Question (" Что такое переменная? ","Область в памяти компьютера для хранения данных, которой можно присвоить имя "));
+        List<Question>questionsAfter=javaQuestionService.getQuestionsByLesson(" Java ");
+        assertEquals(sizeBefore + 1, questionsAfter.size());
+        boolean found=questionsAfter.stream().anyMatch(q->"Что такое инициализация переменной?".equals(q.getQuestion()));
+        assertTrue(found," Новый вопрос присутствует в списке ");
+
+
     }
 
     @Test
