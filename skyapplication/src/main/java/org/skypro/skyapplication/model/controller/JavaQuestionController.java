@@ -28,7 +28,7 @@ public class JavaQuestionController {
 
     @DeleteMapping
     public String removeQuestion (@RequestParam String question){
-        javaQuestionService.deleteQuestion(" Java ", question);
+        javaQuestionService.deleteQuestion(question);
         return " Удаленный вопрос: " + question;
     }
 

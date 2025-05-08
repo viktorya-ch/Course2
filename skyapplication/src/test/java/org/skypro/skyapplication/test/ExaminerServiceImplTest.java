@@ -24,28 +24,20 @@ public class ExaminerServiceImplTest {
     private JavaQuestionService questionService;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testGetQuestions_Success(){
-        List<Question>questions=new ArrayList<>();
+    void testGetQuestions_Success() {
+        List<Question> questions = new ArrayList<>();
         questions.add(new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной "));
         when(questionService.getQuestionsByLesson(" Java ")).thenReturn(questions);
-        List<Question>result = examinerService.getQuestion(15);
-        assertEquals(1,result.size());
+        List<Question> result = examinerService.getQuestion(15);
+        assertEquals(1, result.size());
         assertEquals(" Что такое инициализация переменной? ", result.get(0).getQuestion());
     }
-    void testGetRandomQuestion(){
-        when(questionService.getQuestionsByLesson(" Java ")).thenReturn(List.of(new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной "),
-                new Question(" Что такое переменная? ","Область в памяти компьютера для хранения данных, которой можно присвоить имя ")));
-        Question randomQuestion = examinerService.getRandomQuestion(" Java ");
-        assertNotNull(randomQuestion);
-        assertTrue(randomQuestion.getQuestion().equals(" Что такое инициализация переменной? ") || randomQuestion.getQuestion().equals(" Что такое переменная? "));
-    }
 
 
-
-    }
+}
 

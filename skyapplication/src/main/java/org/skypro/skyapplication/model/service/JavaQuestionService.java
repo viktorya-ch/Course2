@@ -51,8 +51,8 @@ public class JavaQuestionService implements QuestionService {
     }
 
     @Override
-    public void deleteQuestion(String lesson, String question) {
-        if (" Java ".equalsIgnoreCase(lesson)) {
+    public void deleteQuestion( String question) {
+        if (" Java ".equalsIgnoreCase(question)) {
             questions.removeIf(q -> q.getQuestion().equals(question));
         }
 
