@@ -17,7 +17,7 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     private final QuestionService questionService;
     private final int MAX_QUESTIONS = 100;
-    private final Random random = new Random();
+
 
     @Autowired
     public ExaminerServiceImpl(QuestionService questionService) {
@@ -35,22 +35,11 @@ public class ExaminerServiceImpl implements ExaminerService {
             Question randomQuestion = ((JavaQuestionService) questionService).getRandomQuestion(" Java ");
             if (randomQuestion != null) {
                 uniqueQuestions.add(randomQuestion);
-            }else {
+            } else {
                 break;
             }
         }
         return List.copyOf(uniqueQuestions);
     }
 
-
-    public Question getRandomQuestion(String lesson) {
-        List<Question> availableQuestions = questionService.getQuestionsByLesson(" Java ");
-        if (availableQuestions.isEmpty()) {
-            return null;
-        }
-        int index = random.nextInt(availableQuestions.size());
-        return availableQuestions.get(index);
-
-
-    }
 }

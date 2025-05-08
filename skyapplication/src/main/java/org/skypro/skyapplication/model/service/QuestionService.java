@@ -10,7 +10,7 @@ public interface QuestionService {
 
     List<Question> getQuestionsByLesson(String lesson);
 
-    void deleteQuestion(String lesson, String question);
+    void deleteQuestion(String question);
 
     void updateQuestion(String lesson, String oldQuestion, Question newQuestion);
 
