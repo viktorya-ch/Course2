@@ -2,18 +2,18 @@ package org.skypro.skyapplication.model.service;
 
 import org.skypro.skyapplication.model.question.Question;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface QuestionService {
 
-    void addQuestion(Question question);
+    Question addQuestion(Question question);
 
-    List<Question> getQuestionsByLesson(String lesson);
+    Collection<Question> getAll();
 
-    void deleteQuestion(String question);
+    Question removeQuestion(Question question);
 
-    void updateQuestion(String lesson, String oldQuestion, Question newQuestion);
 
-    Question getRandomQuestion (String lesson);
+    Question getRandomQuestion ();
 
 }

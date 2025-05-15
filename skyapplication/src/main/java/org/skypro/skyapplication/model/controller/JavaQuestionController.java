@@ -7,6 +7,7 @@ import org.skypro.skyapplication.model.service.JavaQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -27,14 +28,14 @@ public class JavaQuestionController {
     }
 
     @DeleteMapping
-    public String removeQuestion (@RequestParam String question){
-        javaQuestionService.deleteQuestion(question);
+    public String removeQuestion (@RequestParam Question question){
+        javaQuestionService.removeQuestion(question);
         return " Удаленный вопрос: " + question;
     }
 
 
     @GetMapping
-    public List<Question>getAllQuestions(){
-        return javaQuestionService.getQuestionsByLesson(" Java ");
+    public Collection<Question> getAllQuestions(){
+        return javaQuestionService.getAll();
     }
 }
