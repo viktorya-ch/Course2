@@ -6,10 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
@@ -26,13 +23,13 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public List<Question> getQuestion(int amount) {
-        List<Question> availableQuestions = questionService.getQuestionsByLesson(" Java ");
+        Collection<Question> availableQuestions = questionService.getAll();
         if (availableQuestions.size() >= MAX_QUESTIONS) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, " Запрошено слишком много вопросов ");
         }
         Set<Question> uniqueQuestions = new HashSet<>();
         while (uniqueQuestions.size() < amount) {
-            Question randomQuestion = ((JavaQuestionService) questionService).getRandomQuestion(" Java ");
+            Question randomQuestion = ((JavaQuestionService) questionService).getRandomQuestion();
             if (randomQuestion != null) {
                 uniqueQuestions.add(randomQuestion);
             } else {

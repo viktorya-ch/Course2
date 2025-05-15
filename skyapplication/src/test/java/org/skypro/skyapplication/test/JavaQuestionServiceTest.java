@@ -6,6 +6,7 @@ import org.skypro.skyapplication.model.question.Question;
 import org.skypro.skyapplication.model.service.JavaQuestionService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +15,7 @@ import static org.mockito.Mockito.when;
 public class JavaQuestionServiceTest {
     private JavaQuestionService javaQuestionService;
 
+
     @BeforeEach
     void setUp() {
         javaQuestionService = new JavaQuestionService();
@@ -21,13 +23,14 @@ public class JavaQuestionServiceTest {
 
     @Test
     void testAddQuestion() {
-        List<Question> questionsBefore = javaQuestionService.getQuestionsByLesson(" Java ");
+        Collection<Question> questionsBefore = javaQuestionService.getAll();
         int sizeBefore = questionsBefore.size();
-        Question question = new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной ");
-        javaQuestionService.addQuestion(new Question(" Что такое переменная? ", "Область в памяти компьютера для хранения данных, которой можно присвоить имя "));
-        List<Question> questionsAfter = javaQuestionService.getQuestionsByLesson(" Java ");
+        Question question = new Question(" Что такое переменная? ", "Область в памяти компьютера для хранения данных, которой можно присвоить имя ");
+        javaQuestionService.addQuestion(question);
+        Collection<Question> questionsAfter = javaQuestionService.getAll();
         assertEquals(sizeBefore + 1, questionsAfter.size());
-        boolean found = questionsAfter.stream().anyMatch(q -> "Что такое инициализация переменной?".equals(q.getQuestion()));
+        //boolean found = questionsAfter.stream().anyMatch(q -> "Что такое инициализация переменной?".equals(q.getQuestion()));
+        boolean found = questionsAfter.contains(question);
         assertTrue(found, " Новый вопрос присутствует в списке ");
 
 
@@ -37,28 +40,20 @@ public class JavaQuestionServiceTest {
     void testDeleteQuestion() {
         Question question = new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной ");
         javaQuestionService.addQuestion(question);
-        assertEquals(1, javaQuestionService.getQuestionsByLesson(" Java ").size());
-        javaQuestionService.deleteQuestion( " Что такое инициализация переменной? ");
-        assertEquals(0, javaQuestionService.getQuestionsByLesson(" Java ").size());
+        assertEquals(1, javaQuestionService.getAll().size());
+        javaQuestionService.removeQuestion(question);
+        assertEquals(0, javaQuestionService.getAll().size());
     }
 
-    @Test
-    void testUpdateQuestion() {
-        Question question = new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной ");
-        javaQuestionService.addQuestion(question);
-        Question newQuestion = new Question(" Что такое инициализация переменной? ", " Updated answer ");
-        javaQuestionService.updateQuestion( " Java "," Что такое инициализация переменной? ", newQuestion);
-        List<Question> questions = javaQuestionService.getQuestionsByLesson(" Java ");
-        assertEquals(" Обновленный ответ ", questions.get(0).getAnswer());
-    }
+
+
 
     @Test
     void testGetRandomQuestion() {
         List<Question> questions = new ArrayList<>();
-        questions.add(new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной "));
-        questions.add(new Question(" Что такое переменная? ", "Область в памяти компьютера для хранения данных, которой можно присвоить имя "));
-        when(javaQuestionService.getQuestionsByLesson(" Java ")).thenReturn(questions);
-        Question randomQuestion = javaQuestionService.getRandomQuestion(" Java ");
+        javaQuestionService.addQuestion(new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной "));
+        javaQuestionService.addQuestion(new Question(" Что такое переменная? ", "Область в памяти компьютера для хранения данных, которой можно присвоить имя "));
+        Question randomQuestion = javaQuestionService.getRandomQuestion();
         assertTrue(randomQuestion.getQuestion().equals(" Что такое инициализация переменной? ") || randomQuestion.getQuestion().equals(" Что такое переменная? "));
 
 

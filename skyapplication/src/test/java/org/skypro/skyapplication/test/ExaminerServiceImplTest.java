@@ -32,8 +32,9 @@ public class ExaminerServiceImplTest {
     void testGetQuestions_Success() {
         List<Question> questions = new ArrayList<>();
         questions.add(new Question(" Что такое инициализация переменной? ", " Присвоение какого-то значения переменной "));
-        when(questionService.getQuestionsByLesson(" Java ")).thenReturn(questions);
-        List<Question> result = examinerService.getQuestion(15);
+        when(questionService.getAll()).thenReturn(questions);
+        when(questionService.getRandomQuestion()).thenReturn(questions.get(0));
+        List<Question> result = examinerService.getQuestion(1);
         assertEquals(1, result.size());
         assertEquals(" Что такое инициализация переменной? ", result.get(0).getQuestion());
     }

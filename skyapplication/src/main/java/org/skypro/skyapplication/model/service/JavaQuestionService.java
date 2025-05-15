@@ -3,22 +3,21 @@ package org.skypro.skyapplication.model.service;
 import org.skypro.skyapplication.model.question.Question;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class JavaQuestionService implements QuestionService {
 
-    private final List<Question> questions;
+    private final Set<Question> questions;
     private final Random random;
 
     public JavaQuestionService() {
-        this.questions = new ArrayList<>();
+        this.questions = new HashSet<>();
         this.random = new Random();
-        initializeQuestions();
+
     }
-    private void initializeQuestions(){
+
+    private void initializeQuestions() {
         questions.add(new Question(" Какие методы называют ленивыми? ", " Которые не срабатывают до их непосредственного вызова "));
         questions.add(new Question(" Что такое итерация? ", " Очередной проход цикла "));
         questions.add(new Question(" Можно ли изменять строку? ", " Нет, нужно создать новую "));
@@ -34,50 +33,34 @@ public class JavaQuestionService implements QuestionService {
     }
 
 
-
     @Override
-    public void addQuestion(Question question) {
-      questions.add(question);
-        }
-
-
-
-    @Override
-    public List<Question> getQuestionsByLesson(String lesson) {
-        if (" Java ".equalsIgnoreCase(lesson)) {
-            return new ArrayList<>(questions);
-        }
-        return new ArrayList<>();
+    public Question addQuestion(Question question) {
+        questions.add(question);
+        return question;
     }
 
     @Override
-    public void deleteQuestion( String question) {
-        if (" Java ".equalsIgnoreCase(question)) {
-            questions.removeIf(q -> q.getQuestion().equals(question));
-        }
-
+    public Collection<Question> getAll() {
+        return new HashSet<>(questions);
     }
+
 
     @Override
-    public void updateQuestion(String lesson, String oldQuestion, Question newQuestion) {
-        if (" Java ".equalsIgnoreCase(lesson)) {
-            for (int i = 0; i < questions.size(); i++) {
-                if (questions.get(i).getQuestion().equals(oldQuestion)) {
-                    questions.set(i, newQuestion);
-                    break;
-                }
-            }
+    public Question removeQuestion(Question question) {
+        if (questions.contains(question)) {
+            questions.remove(question);
+            return question;
         }
-
+        throw new NoSuchElementException(" Такой вопрос отсутствует ");
     }
 
 
-    public Question getRandomQuestion(String lesson) {
-        List<Question> questions = getQuestionsByLesson(lesson);
+    public Question getRandomQuestion() {
         if (questions.isEmpty()) {
-            return null;
+            throw new IllegalStateException(" База пустая ");
         }
+        List<Question>questionList = new ArrayList<>(questions);
         int randomIndex = random.nextInt(questions.size());
-        return questions.get(randomIndex);
+        return questionList.get(randomIndex);
     }
 }
