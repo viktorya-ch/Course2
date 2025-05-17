@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 public class JavaQuestionServiceTest {
     private JavaQuestionService javaQuestionService;
@@ -29,7 +28,6 @@ public class JavaQuestionServiceTest {
         javaQuestionService.addQuestion(question);
         Collection<Question> questionsAfter = javaQuestionService.getAll();
         assertEquals(sizeBefore + 1, questionsAfter.size());
-        //boolean found = questionsAfter.stream().anyMatch(q -> "Что такое инициализация переменной?".equals(q.getQuestion()));
         boolean found = questionsAfter.contains(question);
         assertTrue(found, " Новый вопрос присутствует в списке ");
 
@@ -44,8 +42,6 @@ public class JavaQuestionServiceTest {
         javaQuestionService.removeQuestion(question);
         assertEquals(0, javaQuestionService.getAll().size());
     }
-
-
 
 
     @Test
