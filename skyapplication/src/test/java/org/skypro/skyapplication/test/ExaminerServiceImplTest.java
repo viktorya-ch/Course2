@@ -8,7 +8,7 @@ import org.mockito.MockitoAnnotations;
 import org.skypro.skyapplication.model.question.Question;
 import org.skypro.skyapplication.model.service.ExaminerServiceImpl;
 import org.skypro.skyapplication.model.service.JavaQuestionService;
-import org.skypro.skyapplication.model.service.QuestionService;
+
 
 import java.util.ArrayList;
 import java.util.List;
